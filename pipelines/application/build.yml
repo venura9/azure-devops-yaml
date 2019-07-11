@@ -19,6 +19,7 @@ steps:
 
 #create of zip of the publish folder
 - task: ArchiveFiles@2
+  displayName: 'Create Archive: dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip'
   inputs:
     rootFolderOrFile: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/' 
     includeRootFolder: false 
