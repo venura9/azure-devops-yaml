@@ -1,0 +1,14 @@
+steps:
+
+- script: echo 'Agent.JobName is$(Agent.JobName)'
+  displayName: 'Printing the job name'
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'infrastrucutre\**\*' 
+    targetFolder: $(Build.ArtifactStagingDirectory)/infrastructure/
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'infrastructure'
+    targetPath: 'infrastructure'

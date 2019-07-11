@@ -1,0 +1,127 @@
+# Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
+variables:
+  vmImage: 'ubuntu-latest'
+  majorVersion: 1
+  minorVersion: 0
+  applicationName: 'todo'
+
+# Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
+name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
+
+stages:
+
+- stage: BLD
+  displayName: Build(CI)
+  variables: {buildConfiguration: 'Release'}
+  jobs:
+
+  - job: 'Infrastructure'
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - script: echo "Running the Infrastructure build for $(applicationName)"
+    - template: 'pipelines/infrastructure/build.yml'
+
+  - job: 'Application'
+    pool:
+      vmImage: $(vmImage)
+      dependsOn: 'Infrastructure'
+    steps:
+    - script: echo "Running the Application build for $(applicationName)"
+      name: 'Starup'
+    - template: 'pipelines/application/build.yml'
+      parameters: {buildConfiguration: $(buildConfiguration)}
+
+- stage: DEV
+  displayName: 'DEV(CD)'
+  condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  dependsOn: 
+  - BLD
+  variables: {stage: 'dev'}
+  jobs:
+  
+  - job: Primary_AustraliaSouthEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+
+- stage: QA
+  displayName: 'QA(CD)'
+  condition: and(succeeded('DEV'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  dependsOn: 
+  - DEV
+  variables: {stage: 'qa'}
+  jobs:
+
+  - job: Primary_AustraliaSouthEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+
+- stage: UAT
+  displayName: 'UAT(CD)'
+  condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn: 
+  - BLD
+  variables: {stage: 'uat'}
+  jobs:
+
+  - job: Primary_AustraliaSouthEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+
+- stage: STG
+  displayName: 'STAGING(CD)'
+  condition: and(succeeded('UAT'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn: 
+  - UAT
+  variables: {stage: 'stg'}
+  jobs:
+  
+  - job: Primary_AustraliaSouthEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+
+- stage: PRD
+  displayName: 'PROD(CD)'
+  condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn: 
+  - STG
+  variables: {stage: 'prd'}
+  jobs:
+  
+  - job: Primary_AustraliaSouthEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+  
+  - job: Secondary_AustraliaEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {region: 'australiaeast', type: 'secondary', stage: $(stage)}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {region: 'australiaeast', type: 'secondary', stage: $(stage)}
