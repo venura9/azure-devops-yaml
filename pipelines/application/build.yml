@@ -29,6 +29,7 @@ steps:
 
 #publish the zip as a pipeline artifact
 - task: PublishPipelineArtifact@0
+  displayName: 'Publish pipeline artifact - application.zip'
   inputs:
     artifactName: 'application'
     targetPath: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip'
