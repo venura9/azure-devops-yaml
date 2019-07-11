@@ -6,7 +6,8 @@ variables:
   applicationName: 'todo'
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
-name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
+#name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
+name: $(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
 
 stages:
 
