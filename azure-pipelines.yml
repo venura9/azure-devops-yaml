@@ -29,7 +29,7 @@ stages:
       dependsOn: 'Infrastructure'
     steps:
     - script: echo "Running the Application build for $(applicationName)"
-      name: 'Starup'
+      displayName: 'Starup'
     - template: 'pipelines/application/build.yml'
       parameters: {buildConfiguration: $(buildConfiguration)}
 
