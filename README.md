@@ -4,9 +4,3 @@
 
 # Purpose
 Sample Azure DevOps Pipeline Using YAML which pushes the code all the way up to production. 
-
-# Usage
- - [ ] TODO update adding this repo to azure devops w/ Screen Shots
-
-# Notes
- - [ ] TODO any additional notes
