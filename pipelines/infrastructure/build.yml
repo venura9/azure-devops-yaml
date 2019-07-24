@@ -1,14 +1,22 @@
 steps:
 
+#printing the job currently being excecuted
 - script: echo 'Agent.JobName is$(Agent.JobName)'
-  displayName: 'Printing the job name'
+  displayName: 'Start-up'
 
+#clone a fork of Micrososft's sample arm templates
+- script: git clone 'https://github.com/venura9/azure-quickstart-templates.git'
+  name: cloneAppFromGitHub
+  displayName: 'git clone https://github.com/venura9/azure-quickstart-templates.git'
+
+#copy the files to the Artifact staging area
 - task: CopyFiles@2
   inputs:
-    contents: 'infrastrucutre\**\*' 
+    contents: 'azure-quickstart-templates\101-webapp-basic-windows\**\*' 
     targetFolder: $(Build.ArtifactStagingDirectory)/infrastructure/
 
+#publish the pipeline artifact
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'infrastructure'
-    targetPath: 'infrastructure'
+    targetPath: '$(Build.ArtifactStagingDirectory)/infrastructure/'
