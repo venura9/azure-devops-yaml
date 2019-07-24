@@ -9,14 +9,8 @@ steps:
   name: cloneAppFromGitHub
   displayName: 'git clone https://github.com/venura9/azure-quickstart-templates.git'
 
-#copy the files to the Artifact staging area
-- task: CopyFiles@2
-  inputs:
-    contents: 'azure-quickstart-templates\101-webapp-basic-windows\**\*' 
-    targetFolder: $(Build.ArtifactStagingDirectory)/infrastructure/
-
 #publish the pipeline artifact
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'infrastructure'
-    targetPath: '$(Build.ArtifactStagingDirectory)/infrastructure/'
+    targetPath: 'azure-quickstart-templates/101-webapp-basic-windows/'
