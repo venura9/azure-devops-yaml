@@ -4,8 +4,6 @@ variables:
   majorVersion: 1
   minorVersion: 0
   applicationName: 'todo'
-  devServicePrincipalName: SuperServicePrincipal
-  prodServicePrincipalName: SuperServicePrincipal
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 # name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
@@ -49,9 +47,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(devServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(devServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -66,9 +64,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(devServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(devServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
 
 - stage: UAT
   displayName: 'UAT(CD)'
@@ -83,9 +81,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: { location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(devServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: { location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(devServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
 
 - stage: STG
   displayName: 'STAGING(CD)'
@@ -100,9 +98,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(prodServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(prodServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
 
 - stage: PRD
   displayName: 'PROD(CD)'
@@ -117,15 +115,15 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(prodServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(prodServicePrincipalName)}
+      parameters: {type: 'primary', stage: $(stage)}
   
   - job: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(prodServicePrincipalName)}
+      parameters: {type: 'primary', stage: $(stage)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(prodServicePrincipalName) }
+      parameters: {type: 'primary', stage: $(stage)}
