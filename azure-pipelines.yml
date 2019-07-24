@@ -50,8 +50,8 @@ stages:
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
       parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
-    - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+#    - template: 'pipelines/application/deploy.yml'
+#      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -83,9 +83,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: { region: 'australiasoutheast', type: 'primary', stage: 'uat', servicePrincipal: $(servicePrincipal) }
+      parameters: { region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: { region: 'australiasoutheast', type: 'primary', stage: 'uat', servicePrincipal: $(servicePrincipal) }
+      parameters: { region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: STG
   displayName: 'STAGING(CD)'

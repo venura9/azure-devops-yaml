@@ -9,7 +9,7 @@ steps:
   inputs:
     azureSubscription: SuperServicePrincipal
     action: 'Create Or Update Resource Group' # Options: create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG
-    resourceGroupName: $(stage)-$(region)
+    resourceGroupName: "$(stage)-$(region)"
     csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
     csmParametersFile: 
     overrideParameters: # Optional
