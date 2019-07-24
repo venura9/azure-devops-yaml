@@ -49,9 +49,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -66,9 +66,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: UAT
   displayName: 'UAT(CD)'
@@ -83,9 +83,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: { region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: { location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: { region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: { location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: STG
   displayName: 'STAGING(CD)'
@@ -100,9 +100,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: PRD
   displayName: 'PROD(CD)'
@@ -117,15 +117,15 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
   
   - job: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
