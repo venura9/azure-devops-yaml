@@ -1,2 +1,15 @@
 steps:
 
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: 'infrastructure'
+    path: $(System.ArtifactsDirectory)/infrastructure/
+
+- task: AzureResourceGroupDeployment@2
+  inputs:
+    azureSubscription: $(servicePrincipal)
+    action: 'Create Or Update Resource Group' # Options: create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG
+    resourceGroupName: $(region)
+    csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
+    csmParametersFile: 
+    overrideParameters: # Optional

@@ -1,2 +1,12 @@
 steps:
 
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: 'application'
+    path: $(System.ArtifactsDirectory)/application/
+
+# - task: AzureRmWebAppDeployment@3
+#   inputs:
+#     azureSubscription: $(servicePrincipal)
+#     WebAppName: '<Name of web app>'
+#     Package: $(System.ArtifactsDirectory)/**/*.zip

@@ -4,6 +4,8 @@ variables:
   majorVersion: 1
   minorVersion: 0
   applicationName: 'todo'
+  devServicePrincipalName: SuperServicePrincipal
+  prodServicePrincipalName: SuperServicePrincipal
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 # name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
@@ -39,7 +41,7 @@ stages:
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
   - BLD
-  variables: {stage: 'dev'}
+  variables: {stage: 'dev', servicePrincipal: $(devServicePrincipalName)}
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -47,16 +49,16 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: QA
   displayName: 'QA(CD)'
   condition: and(succeeded('DEV'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
   - DEV
-  variables: {stage: 'qa'}
+  variables: {stage: 'qa', servicePrincipal: $(devServicePrincipalName) }
   jobs:
 
   - job: Primary_AustraliaSouthEast
@@ -64,16 +66,16 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: UAT
   displayName: 'UAT(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
   - BLD
-  variables: {stage: 'uat'}
+  variables: {stage: 'uat', servicePrincipal: $(devServicePrincipalName)}
   jobs:
 
   - job: Primary_AustraliaSouthEast
@@ -81,16 +83,16 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: STG
   displayName: 'STAGING(CD)'
   condition: and(succeeded('UAT'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
   - UAT
-  variables: {stage: 'stg'}
+  variables: {stage: 'stg', servicePrincipal: $(prodServicePrincipalName)}
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -98,16 +100,16 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
 - stage: PRD
   displayName: 'PROD(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
   - STG
-  variables: {stage: 'prd'}
+  variables: {stage: 'prd', servicePrincipal: $(prodServicePrincipalName)}
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -115,15 +117,15 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
   
   - job: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {region: 'australiaeast', type: 'secondary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: {region: 'australiaeast', type: 'secondary', stage: $(stage)}
+      parameters: {region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
