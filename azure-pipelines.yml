@@ -92,7 +92,7 @@ stages:
   condition: and(succeeded('UAT'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
   - UAT
-  variables: {stage: 'stg', servicePrincipal: $(prodServicePrincipalName), webAppName: "$(stage)-$(applicationName)-webapp"}
+  variables: {stage: 'stg', servicePrincipal: $(prodServicePrincipalName)}
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -100,7 +100,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal), webAppName: $(webAppName) }
+      parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
       parameters: {location: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
 
