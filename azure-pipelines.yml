@@ -26,15 +26,15 @@ stages:
       displayName: 'Starup'
     - template: 'pipelines/infrastructure/build.yml'
 
-  # - job: Application
-  #   pool:
-  #     vmImage: $(vmImage)
-  #   dependsOn: Infrastructure
-  #   steps:
-  #   - script: echo "Running the Application build for $(applicationName)"
-  #     displayName: 'Starup'
-  #   - template: 'pipelines/application/build.yml'
-  #     parameters: {buildConfiguration: $(buildConfiguration)}
+  - job: Application
+    pool:
+      vmImage: $(vmImage)
+    dependsOn: Infrastructure
+    steps:
+    - script: echo "Running the Application build for $(applicationName)"
+      displayName: 'Starup'
+    - template: 'pipelines/application/build.yml'
+      parameters: {buildConfiguration: $(buildConfiguration)}
 
 - stage: DEV
   displayName: 'DEV(CD)'

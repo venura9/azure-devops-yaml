@@ -5,8 +5,8 @@ steps:
     artifact: 'application'
     path: $(System.ArtifactsDirectory)/application/
 
-# - task: AzureRmWebAppDeployment@3
-#   inputs:
-#     azureSubscription: $(servicePrincipal)
-#     WebAppName: '<Name of web app>'
-#     Package: $(System.ArtifactsDirectory)/**/*.zip
+- task: AzureRmWebAppDeployment@3
+  inputs:
+    azureSubscription: $(servicePrincipal)
+    WebAppName: "$(stage)-$(applicationName)-webapp"
+    Package: $(System.ArtifactsDirectory)/**/*.zip
