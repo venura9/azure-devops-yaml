@@ -16,17 +16,17 @@ stages:
   variables: {buildConfiguration: 'Release'}
   jobs:
 
-  - job: 'Infrastructure'
+  - job: Infrastructure
     pool:
       vmImage: $(vmImage)
     steps:
     - script: echo "Running the Infrastructure build for $(applicationName)"
     - template: 'pipelines/infrastructure/build.yml'
 
-  - job: 'Application'
+  - job: Application
     pool:
       vmImage: $(vmImage)
-      dependsOn: 'Infrastructure'
+      dependsOn: Infrastructure
     steps:
     - script: echo "Running the Application build for $(applicationName)"
       displayName: 'Starup'
