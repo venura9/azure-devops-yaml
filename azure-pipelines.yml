@@ -29,7 +29,7 @@ stages:
   - job: Application
     pool:
       vmImage: $(vmImage)
-    dependsOn: Infrastructure
+#    dependsOn: Infrastructure
     steps:
     - script: echo "Running the Application build for $(applicationName)"
       displayName: 'Starup'
@@ -83,9 +83,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: { region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: { region: 'australiasoutheast', type: 'primary', stage: 'uat', servicePrincipal: $(servicePrincipal) }
     - template: 'pipelines/application/deploy.yml'
-      parameters: { region: 'australiasoutheast', type: 'primary', stage: $(stage), servicePrincipal: $(servicePrincipal) }
+      parameters: { region: 'australiasoutheast', type: 'primary', stage: 'uat', servicePrincipal: $(servicePrincipal) }
 
 - stage: STG
   displayName: 'STAGING(CD)'
