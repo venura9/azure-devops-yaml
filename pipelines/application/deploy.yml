@@ -7,6 +7,6 @@ steps:
 
 - task: AzureRmWebAppDeployment@3
   inputs:
-    azureSubscription: SuperServicePrincipal
+    azureSubscription: $(servicePrincipal)
     WebAppName: "$(stage)-$(applicationName)-webapp"
     Package: $(System.ArtifactsDirectory)/**/*.zip
