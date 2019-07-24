@@ -14,5 +14,4 @@ steps:
     resourceGroupName: "$(stage)-$(applicationName)-rg"
     csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
     location: 'australiasoutheast'
-    overrideParameters: 
-      - webAppName "$(stage)-$(applicationName)-webapp"
+    overrideParameters: - webAppName "$(stage)-$(applicationName)-webapp"
