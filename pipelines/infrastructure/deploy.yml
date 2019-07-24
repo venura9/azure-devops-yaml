@@ -1,14 +1,16 @@
 steps:
 
+#download the published pipelines artifact
 - task: DownloadPipelineArtifact@2
   inputs:
     artifact: 'infrastructure'
     path: $(System.ArtifactsDirectory)/infrastructure/
 
+#deploy to azure
 - task: AzureResourceGroupDeployment@2
   inputs:
     azureSubscription: SuperServicePrincipal
     action: 'Create Or Update Resource Group' # Options: create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG
     resourceGroupName: "$(region)-$(stage)-$(applicationName)-rg"
     csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
-    overrideParameters: - webAppName "$(region)-$(stage)-$(applicationName)-webapp"
+    overrideParameters: 
