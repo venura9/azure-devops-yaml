@@ -21,7 +21,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - script: echo "Running the Infrastructure build for $(applicationName)"
-      displayName: 'Running the Infrastructure build for $(applicationName)'
+      displayName: 'Starup'
     - template: 'pipelines/infrastructure/build.yml'
 
   - job: Application

@@ -1,9 +1,5 @@
 steps:
 
-#printing the job currently being excecuted
-- script: echo 'Agent.JobName is$(Agent.JobName)'
-  displayName: 'Start-up'
-
 #clone a fork of Micrososft's sample arm templates
 - script: git clone 'https://github.com/venura9/azure-quickstart-templates.git'
   name: cloneAppFromGitHub

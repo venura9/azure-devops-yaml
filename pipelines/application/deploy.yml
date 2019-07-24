@@ -1,3 +1,2 @@
 steps:
 
-- script: echo "Agent.JobName ${{ parameters.stage  }}"
