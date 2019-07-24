@@ -7,9 +7,9 @@ steps:
 
 - task: AzureResourceGroupDeployment@2
   inputs:
-    azureSubscription: $(servicePrincipal)
+    azureSubscription: SuperServicePrincipal
     action: 'Create Or Update Resource Group' # Options: create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG
-    resourceGroupName: $(region)
+    resourceGroupName: $(stage)_$(region)
     csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
     csmParametersFile: 
     overrideParameters: # Optional
