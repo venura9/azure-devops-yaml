@@ -10,7 +10,7 @@ steps:
   displayName: App - Stop
   inputs:
     azureSubscription: SuperServicePrincipal
-    action: 'stop' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
+    action: 'Stop Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
 
 - task: AzureRmWebAppDeployment@3
@@ -24,5 +24,5 @@ steps:
   displayName: App - Start
   inputs:
     azureSubscription: SuperServicePrincipal
-    action: 'start' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
+    action: 'Start Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
