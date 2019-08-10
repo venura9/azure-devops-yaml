@@ -38,7 +38,7 @@ stages:
   displayName: 'DEV(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
-  - BLD
+   - BLD
   variables: {stage: 'dev'}
   jobs:
   
@@ -55,7 +55,7 @@ stages:
   displayName: 'QA(CD)'
   condition: and(succeeded('DEV'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
-  - DEV
+   - DEV
   variables: {stage: 'qa'}
   jobs:
 
@@ -72,7 +72,7 @@ stages:
   displayName: 'UAT(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
-  - BLD
+   - BLD
   variables: { stage: 'uat'}
   jobs:
 
@@ -89,7 +89,7 @@ stages:
   displayName: 'STAGING(CD)'
   condition: and(succeeded('UAT'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
-  - UAT
+   - UAT
   variables: {stage: 'stg'}
   jobs:
   
@@ -106,8 +106,7 @@ stages:
   displayName: 'PROD(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
-  - STG
-  - UAT
+   - STG
   variables: {stage: 'prd', servicePrincipal: $(prodServicePrincipalName)}
   jobs:
   
