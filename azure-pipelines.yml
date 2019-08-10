@@ -104,7 +104,7 @@ stages:
 
 - stage: PRD
   displayName: 'PROD(CD)'
-  condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded('STG'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
    - STG
   variables: {stage: 'prd', servicePrincipal: $(prodServicePrincipalName)}
