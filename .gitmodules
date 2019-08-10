@@ -1,3 +1,0 @@
-[submodule "application/dotnetcore-sqldb-tutorial"]
-	path = application/
-	url = https://github.com/venura9/dotnetcore-sqldb-tutorial.git
