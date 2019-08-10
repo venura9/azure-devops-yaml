@@ -107,6 +107,7 @@ stages:
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
   - STG
+  - UAT
   variables: {stage: 'prd', servicePrincipal: $(prodServicePrincipalName)}
   jobs:
   
