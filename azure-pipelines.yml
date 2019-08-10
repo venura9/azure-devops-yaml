@@ -3,7 +3,7 @@ variables:
   vmImage: 'ubuntu-latest'
   majorVersion: 1
   minorVersion: 0
-  applicationName: 'todo'
+  applicationName: 'todo1'
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 # name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
