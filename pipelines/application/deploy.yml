@@ -9,7 +9,7 @@ steps:
 - task: AzureAppServiceManage@0
   displayName: App - Stop
   inputs:
-    azureSubscription: 
+    azureSubscription: SuperServicePrincipal
     action: 'stop Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
 
