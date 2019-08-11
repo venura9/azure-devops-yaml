@@ -6,8 +6,7 @@ variables:
   applicationName: 'todo'
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
-# name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
-name: $(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
+name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
 
 stages:
 
@@ -27,9 +26,11 @@ stages:
   - job: Application
     pool:
       vmImage: $(vmImage)
-    #dependsOn: Infrastructure
+    dependsOn: Infrastructure
     steps:
+    #this is to explain that you can run a task in the same file
     - script: echo "Running the Application build for $(applicationName)"
       displayName: 'Starup'
+    #this is to explain that you can use a template
     - template: 'pipelines/application/build.yml'
       parameters: {buildConfiguration: $(buildConfiguration)}
