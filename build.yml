@@ -34,7 +34,9 @@ trigger:
     exclude:
     - releases/old*
   tags:
-    exclude: 'do_not_build'
+    exclude: v1
+  paths:
+    exclude: README.md
 pr: none
 
 stages:
