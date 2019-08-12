@@ -2,14 +2,15 @@
 
 variables:
 - group: 'version_numbers'
+#these are defined using variable groups
+#majorVersion: 1
+#minorVersion: 0
 - name: vmImage
   value: 'ubuntu-latest'
 - name: applicationName
   value: 'todo'
 
-#these are defined using variable groups
-#majorVersion: 1
-#minorVersion: 0
+
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
