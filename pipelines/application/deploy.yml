@@ -9,20 +9,20 @@ steps:
 - task: AzureAppServiceManage@0
   displayName: App - Stop
   inputs:
-    azureSubscription: SuperServicePrincipal
+    azureSubscription: $(spn)
     action: 'Stop Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
 
 - task: AzureRmWebAppDeployment@3
   displayName: App - Deploy
   inputs:
-    azureSubscription: SuperServicePrincipal
+    azureSubscription: $(spn)
     WebAppName: "$(stage)-$(applicationName)-webapp"
     Package: $(System.ArtifactsDirectory)/**/*.zip
 
 - task: AzureAppServiceManage@0
   displayName: App - Start
   inputs:
-    azureSubscription: SuperServicePrincipal
+    azureSubscription: $(spn)
     action: 'Start Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
