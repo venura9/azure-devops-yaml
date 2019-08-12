@@ -1,6 +1,6 @@
 steps:
 
-- script: echo "SPN - $(spn)"
+- script: echo $SPN
 
 #download the published pipelines artifact
 - task: DownloadPipelineArtifact@2
