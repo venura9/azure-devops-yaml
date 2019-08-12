@@ -1,9 +1,9 @@
 steps:
 
 - script: |
-  echo $SPN
-  echo $(spn)
-  echo $(stage)
+    echo $SPN
+    echo $(spn)
+    echo $(stage)
 
 
 #download the published pipelines artifact
