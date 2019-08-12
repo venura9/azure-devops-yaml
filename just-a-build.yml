@@ -5,7 +5,7 @@ variables:
 #another way to show the same thing 
 #applicationName: 'todo'
 - name: applicationName
-    value: 'todo'
+  value: 'todo'
 
 #using variable groups
 #majorVersion: 1
