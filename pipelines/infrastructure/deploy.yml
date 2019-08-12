@@ -1,3 +1,6 @@
+parameters:
+  spn: ''
+
 steps:
 
 #download the published pipelines artifact
