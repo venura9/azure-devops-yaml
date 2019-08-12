@@ -57,7 +57,9 @@ stages:
   condition: and(succeeded('DEV'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
    - DEV
-  variables: {stage: 'qa'}
+  variables: 
+    stage: 'qa'
+    spn: 'SuperServicePrincipal'
   jobs:
 
   - job: Primary_AustraliaSouthEast
@@ -93,7 +95,9 @@ stages:
   condition: and(succeeded('UAT'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
    - UAT
-  variables: {stage: 'stg'}
+  variables: 
+    stage: 'stg'
+    spn: 'SuperServicePrincipal'
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -110,7 +114,9 @@ stages:
   condition: and(succeeded('STG'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
    - STG
-  variables: {stage: 'prd', servicePrincipal: $(prodServicePrincipalName)}
+  variables: 
+    stage: 'prd'
+    spn: 'SuperServicePrincipal'
   jobs:
   
   - job: Primary_AustraliaSouthEast
