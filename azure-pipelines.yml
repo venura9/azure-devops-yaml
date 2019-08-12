@@ -48,9 +48,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -67,9 +67,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
 
 - stage: UAT
   displayName: 'UAT(CD)'
@@ -86,9 +86,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
 
 - stage: STG
   displayName: 'STAGING(CD)'
@@ -105,9 +105,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
 
 - stage: PRD
   displayName: 'PROD(CD)'
@@ -124,15 +124,15 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $spn}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $spn}
   
   - job: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $spn}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
