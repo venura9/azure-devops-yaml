@@ -1,5 +1,3 @@
-# Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
-
 variables:
 - group: 'version_numbers'
 #these are defined using variable groups
@@ -9,8 +7,8 @@ variables:
   value: 'ubuntu-latest'
 - name: applicationName
   value: 'todo'
-
-
+#there is another way if you are interested
+#'Click Edit > Variables'
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
@@ -23,17 +21,10 @@ stages:
   variables: {buildConfiguration: 'Release'}
   jobs:
 
-  - job: Infrastructure
-    pool:
-      vmImage: $(vmImage)
-    steps:
-    - script: echo "Running the Infrastructure build for $(applicationName)"
-      displayName: 'Starup'
-    - template: 'pipelines/infrastructure/build.yml'
-
   - job: Application
     pool:
       vmImage: $(vmImage)
+    #this won't run before Infrastructure, comment the dependsOn to run the jobs simultaneously
     dependsOn: Infrastructure
     steps:
     #this is to explain that you can run a task in the same file
@@ -42,3 +33,11 @@ stages:
     #this is to explain that you can use a template
     - template: 'pipelines/application/build.yml'
       parameters: {buildConfiguration: $(buildConfiguration)}
+
+  - job: Infrastructure
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - script: echo "Running the Infrastructure build for $(applicationName)"
+      displayName: 'Starup'
+    - template: 'pipelines/infrastructure/build.yml'
