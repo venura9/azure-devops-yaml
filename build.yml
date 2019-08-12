@@ -1,5 +1,5 @@
 variables:
-#'majorVersion' and 'minorVersion' defined here...
+#'majorVersion' and 'minorVersion' defined in variable groups, this is for the product managers
 #'variable: value' can not be used when - group is used
 - group: 'version_numbers'
 - name: vmImage
