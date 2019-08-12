@@ -40,7 +40,6 @@ stages:
    - BLD
   variables: 
     stage: 'dev'
-    spn: 'SuperServicePrincipal'
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -59,7 +58,6 @@ stages:
    - DEV
   variables: 
     stage: 'qa'
-    spn: 'SuperServicePrincipal'
   jobs:
 
   - job: Primary_AustraliaSouthEast
@@ -78,7 +76,6 @@ stages:
    - BLD
   variables: 
     stage: 'uat'
-    spn: 'SuperServicePrincipal'
   jobs:
 
   - job: Primary_AustraliaSouthEast
@@ -86,7 +83,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', ${{ parameters.spn }}spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
 
@@ -97,7 +94,6 @@ stages:
    - UAT
   variables: 
     stage: 'stg'
-    spn: 'SuperServicePrincipal'
   jobs:
   
   - job: Primary_AustraliaSouthEast
@@ -116,7 +112,6 @@ stages:
    - STG
   variables: 
     stage: 'prd'
-    spn: 'SuperServicePrincipal'
   jobs:
   
   - job: Primary_AustraliaSouthEast
