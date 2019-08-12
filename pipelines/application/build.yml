@@ -36,4 +36,3 @@ steps:
   inputs:
     artifactName: 'application'
     targetPath: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip'
- 
