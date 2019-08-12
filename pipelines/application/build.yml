@@ -1,5 +1,8 @@
 steps:
 
+#usage: TaskName@<major_version#>
+#custom tasks can be used in the same way, if you have re-used the same name(BAD!!!) just use guid@<major_version#>. 
+
 #Clone a fork of Micrososft's sample .net core application
 - script: git clone 'https://github.com/venura9/dotnetcore-sqldb-tutorial.git'
   name: cloneAppFromGitHub
@@ -33,4 +36,4 @@ steps:
   inputs:
     artifactName: 'application'
     targetPath: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip'
-
+ 
