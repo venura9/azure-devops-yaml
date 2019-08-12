@@ -34,7 +34,7 @@ trigger:
     exclude:
     - releases/old*
   tags:
-    exclude: do_not_build
+    exclude: 'do_not_build'
 pr: none
 
 stages:
