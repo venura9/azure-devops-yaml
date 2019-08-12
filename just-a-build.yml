@@ -1,7 +1,8 @@
 # Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
 variables:
 - group: 'version_numbers'
-  vmImage: 'ubuntu-latest'
+- name: vmImage
+  value: 'ubuntu-latest'
 
 #another way to show the same thing 
 #applicationName: 'todo'
