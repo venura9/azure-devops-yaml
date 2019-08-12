@@ -4,8 +4,8 @@ variables:
 
 #another way to show the same thing 
 #applicationName: 'todo'
-- name: applicationName
-  value: 'todo'
+#- name: applicationName
+#  value: 'todo'
 
 #using variable groups
 #majorVersion: 1
