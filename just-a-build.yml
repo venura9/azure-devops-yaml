@@ -1,24 +1,15 @@
 # Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
-variables:
-  applicationName: 'todo'
 
 variables:
 - group: 'version_numbers'
 - name: vmImage
   value: 'ubuntu-latest'
+- name: applicationName
+  value: 'todo'
 
-#following are defined using variable groups
+#these are defined using variable groups
 #majorVersion: 1
 #minorVersion: 0
-
-#another way to show the same thing 
-#applicationName: 'todo'
-#- name: applicationName
-#  value: 'todo'
-
-
-
-
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
