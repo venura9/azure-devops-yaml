@@ -1,17 +1,19 @@
 # Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
 variables:
+  applicationName: 'todo'
 - group: 'version_numbers'
 - name: vmImage
   value: 'ubuntu-latest'
+
+#following are defined using variable groups
+#majorVersion: 1
+#minorVersion: 0
 
 #another way to show the same thing 
 #applicationName: 'todo'
 #- name: applicationName
 #  value: 'todo'
 
-#using variable groups
-#majorVersion: 1
-#minorVersion: 0
 
 
 
