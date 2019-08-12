@@ -1,13 +1,12 @@
 variables:
+#majorVersion and minorVersion defined here...
+#'variable: value' can not be used when - group is used
 - group: 'version_numbers'
-#these are defined using variable groups
-#majorVersion: 1
-#minorVersion: 0
 - name: vmImage
   value: 'ubuntu-latest'
 - name: applicationName
   value: 'todo'
-#there is another way if you are interested
+#There is another way, recommend not to use it, it's not in the source or azure devops, you delete it, it's  gone (? version control).
 #'Click Edit > Variables'
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
@@ -17,9 +16,11 @@ stages:
 
 - stage: BLD
   displayName: Build(CI)
-  #this can be a global variable as well
+  #below can be a global variable as well
   variables: {buildConfiguration: 'Release'}
   jobs:
+  #below is an alternate way to use jobs, not covered in this demo
+  #- template: jobs.yml
 
   - job: Application
     pool:
