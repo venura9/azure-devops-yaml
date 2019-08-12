@@ -2,15 +2,15 @@
 variables:
   vmImage: 'ubuntu-latest'
 
-  #another way to show the same thing 
-  #applicationName: 'todo'
-  - name: applicationName
+#another way to show the same thing 
+#applicationName: 'todo'
+- name: applicationName
     value: 'todo'
 
-  #using variable groups
-  #majorVersion: 1
-  #minorVersion: 0
-  group: 'version_numbers'
+#using variable groups
+#majorVersion: 1
+#minorVersion: 0
+- group: 'version_numbers'
 
 
 
