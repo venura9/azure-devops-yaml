@@ -124,15 +124,15 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: $spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: $spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
   
   - job: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', stage: $(stage), spn: $spn}
+      parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', stage: $(stage), spn: $(spn)}
