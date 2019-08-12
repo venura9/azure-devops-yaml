@@ -1,28 +1,32 @@
 steps:
 
+#download the published pipelines artifact
 - task: DownloadPipelineArtifact@2
   displayName: App - Downloading the Artifact
   inputs:
     artifact: 'application'
     path: $(System.ArtifactsDirectory)/application/
 
+#stop the slot
 - task: AzureAppServiceManage@0
   displayName: App - Stop
   inputs:
-    azureSubscription: $(spn)
+    azureSubscription: SuperServicePrincipal
     action: 'Stop Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
 
+#deploy to slot
 - task: AzureRmWebAppDeployment@3
   displayName: App - Deploy
   inputs:
-    azureSubscription: $(spn)
+    azureSubscription: SuperServicePrincipal
     WebAppName: "$(stage)-$(applicationName)-webapp"
     Package: $(System.ArtifactsDirectory)/**/*.zip
 
+#start the slot
 - task: AzureAppServiceManage@0
   displayName: App - Start
   inputs:
-    azureSubscription: $(spn)
+    azureSubscription: SuperServicePrincipal
     action: 'Start Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
     webAppName: "$(stage)-$(applicationName)-webapp"
