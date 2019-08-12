@@ -1,5 +1,6 @@
 # Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
 variables:
+- group: 'version_numbers'
   vmImage: 'ubuntu-latest'
 
 #another way to show the same thing 
@@ -10,7 +11,7 @@ variables:
 #using variable groups
 #majorVersion: 1
 #minorVersion: 0
-- group: 'version_numbers'
+
 
 
 
