@@ -1,7 +1,8 @@
 variables:
 #'majorVersion' and 'minorVersion' defined in variable groups, this is for the product managers
-#'variable: value' can not be used when - group is used
+#'variable: value' can not be used when '- group' is used
 - group: 'version_numbers'
+
 - name: vmImage
   value: 'ubuntu-latest'
 - name: applicationName
@@ -11,7 +12,6 @@ variables:
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
-
 
 #basic form of a trigger
 ##trigger:
@@ -33,8 +33,7 @@ trigger:
     - develop
     exclude:
     - releases/old*
-  tags:
-    exclude: v1
+
   paths:
     exclude: README.md
 pr: none
@@ -46,19 +45,21 @@ stages:
   #below can be a global variable as well
   variables: {buildConfiguration: 'Release'}
   jobs:
-  #below is an alternate way to use jobs, not covered in this demo
+  #Below is an alternate way to use jobs, not covered in this demo
   #- template: jobs.yml
 
   - job: Application
     pool:
       vmImage: $(vmImage)
-    #this won't run before Infrastructure, comment the dependsOn to run the jobs simultaneously
+    #This won't run before Infrastructure, comment the dependsOn to run the jobs simultaneously
     dependsOn: Infrastructure
     steps:
-    #this is to explain that you can run a task in the same file
+    #This is to explain that you can run a task in the same file
+    #If you really love powershell or bash, this is all you need.
+    #Make sure to pick the correct build agent image or use '-pwsh' '-bash'
     - script: echo "Running the Application build for $(applicationName)"
       displayName: 'Starup'
-    #this is to explain that you can use a template
+    #This is to explain that you can use a template
     - template: 'pipelines/application/build.yml'
       parameters: {buildConfiguration: $(buildConfiguration)}
 
