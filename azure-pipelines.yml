@@ -74,7 +74,9 @@ stages:
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: 
    - BLD
-  variables: { stage: 'uat'}
+  variables: 
+    stage: 'uat'
+    spn: 'SuperServicePrincipal'
   jobs:
 
   - job: Primary_AustraliaSouthEast

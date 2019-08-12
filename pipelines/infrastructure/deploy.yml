@@ -1,7 +1,6 @@
 steps:
 
 - script: |
-    echo $SPN
     echo $(spn)
     echo $(stage)
 
