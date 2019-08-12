@@ -1,9 +1,18 @@
 # Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
 variables:
   vmImage: 'ubuntu-latest'
-  majorVersion: 1
-  minorVersion: 0
-  applicationName: 'todo'
+
+  #another way to show the same thing 
+  #applicationName: 'todo'
+  - name: applicationName
+    value: 'todo'
+
+  #using variable groups
+  #majorVersion: 1
+  #minorVersion: 0
+  group: 'version_numbers'
+
+
 
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
@@ -12,6 +21,7 @@ stages:
 
 - stage: BLD
   displayName: Build(CI)
+  #this can be a global variable as well
   variables: {buildConfiguration: 'Release'}
   jobs:
 
