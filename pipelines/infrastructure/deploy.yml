@@ -14,7 +14,7 @@ steps:
 - task: AzureResourceGroupDeployment@2
   displayName: 'Infra - Deploy'
   inputs:
-    azureSubscription: $ {{ parameters.spn }}
+    azureSubscription: ${{ parameters.spn }}
     action: 'Create Or Update Resource Group' # Options: create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG
     resourceGroupName: "$(stage)-$(applicationName)-rg"
     csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
