@@ -12,6 +12,31 @@ variables:
 # Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
 name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
 
+
+#basic form of a trigger
+##trigger:
+##- master
+##- develop
+
+#if a trigger is not specified it's assumed '*'
+##trigger:
+##  branches:
+##    include:
+##    - '*'
+
+# specific branch build
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+    exclude:
+    - releases/old*
+  tags:
+    exclude: do_not_build
+pr: none
+
 stages:
 
 - stage: BLD
