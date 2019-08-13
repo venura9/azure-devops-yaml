@@ -73,3 +73,4 @@ stages:
     - script: echo "Running the Infrastructure build for $(applicationName)"
       displayName: 'Starup'
     - template: 'pipelines/infrastructure/build.yml'
+    
