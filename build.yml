@@ -1,18 +1,3 @@
-variables:
-#'majorVersion' and 'minorVersion' defined in variable groups, this is for the product managers
-#'variable: value' can not be used when '- group' is used
-- group: 'version_numbers'
-
-- name: vmImage
-  value: 'ubuntu-latest'
-- name: applicationName
-  value: 'todo'
-#There is another way, recommend not to use it, it's not in the source or azure devops, you delete it, it's  gone (? version control).
-#'Click Edit > Variables'
-
-# Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
-name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
-
 #basic form of a trigger
 ##trigger:
 ##- master
@@ -40,6 +25,21 @@ trigger:
     exclude:
     - README.md
 pr: none
+
+variables:
+#'majorVersion' and 'minorVersion' defined in variable groups, this is for the product managers
+#'variable: value' can not be used when '- group' is used
+- group: 'version_numbers'
+
+- name: vmImage
+  value: 'ubuntu-latest'
+- name: applicationName
+  value: 'todo'
+#There is another way, recommend not to use it, it's not in the source or azure devops, you delete it, it's  gone (? version control).
+#'Click Edit > Variables'
+
+# Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
+name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
 
 stages:
 
