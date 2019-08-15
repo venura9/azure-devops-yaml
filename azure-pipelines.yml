@@ -146,4 +146,5 @@ stages:
       parameters: {type: 'secondary', spn: 'SuperServicePrincipal', location: 'australiaeast'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'secondary', spn: 'SuperServicePrincipal'}
-      
+
+    
