@@ -13,14 +13,14 @@ steps:
   inputs:
     azureSubscription: ${{ parameters.spn }}
     action: 'Stop Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
-    webAppName: "$(stage)-$(applicationName)--${{ parameters.type }}-webapp"
+    webAppName: "$(stage)-$(applicationName)-${{ parameters.type }}-webapp"
 
 #deploy to production slot
 - task: AzureRmWebAppDeployment@3
   displayName: App - Deploy
   inputs:
     azureSubscription: ${{ parameters.spn }}
-    WebAppName: "$(stage)-$(applicationName)--${{ parameters.type }}-webapp"
+    WebAppName: "$(stage)-$(applicationName)-${{ parameters.type }}-webapp"
     Package: $(System.ArtifactsDirectory)/**/*.zip
 
 #start the production slot
@@ -29,4 +29,4 @@ steps:
   inputs:
     azureSubscription: ${{ parameters.spn }}
     action: 'Start Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
-    webAppName: "$(stage)-$(applicationName)--${{ parameters.type }}-webapp"
+    webAppName: "$(stage)-$(applicationName)-${{ parameters.type }}-webapp"
