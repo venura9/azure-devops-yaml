@@ -1,4 +1,19 @@
-# Application Source: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+    exclude:
+    - releases/old*
+  tags:
+    exclude:
+    - do_not_build
+  paths:
+    exclude:
+    - README.md
+pr: none
+
 variables:
   vmImage: 'ubuntu-latest'
   majorVersion: 1
@@ -47,7 +62,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
 
@@ -83,7 +98,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
 
@@ -101,7 +116,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
 
@@ -119,7 +134,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
   
@@ -128,6 +143,6 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'secondary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'secondary', spn: 'SuperServicePrincipal', location: 'australiaeast'}
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'secondary', spn: 'SuperServicePrincipal'}
