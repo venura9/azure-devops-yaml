@@ -16,7 +16,7 @@ steps:
   inputs:
     azureSubscription: ${{ parameters.spn }}
     action: 'Create Or Update Resource Group' # Options: create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG
-    resourceGroupName: "$(stage)-$(applicationName)-rg"
+    resourceGroupName: "$(stage)-$(applicationName)-${{ parameters.type }}-rg"
     csmFile: $(System.ArtifactsDirectory)/infrastructure/azuredeploy.json
     location: 'australiasoutheast'
-    overrideParameters: -webAppName "$(stage)-$(applicationName)"
+    overrideParameters: -webAppName "$(stage)-$(applicationName)-${{ parameters.type }}"

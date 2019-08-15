@@ -17,7 +17,7 @@ trigger:
     - master
     - develop
     exclude:
-    - releases/old*
+    - master/old*
   tags:
     exclude:
     - do_not_build
@@ -73,4 +73,3 @@ stages:
     - script: echo "Running the Infrastructure build for $(applicationName)"
       displayName: 'Starup'
     - template: 'pipelines/infrastructure/build.yml'
-    
