@@ -1,0 +1,67 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+    exclude:
+    - releases/old*
+  tags:
+    exclude:
+    - do_not_build
+  paths:
+    exclude:
+    - README.md
+pr: none
+
+variables:
+  vmImage: 'ubuntu-latest'
+  majorVersion: 1
+  minorVersion: 0
+  applicationName: 'tudu'
+
+# Reference: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/run-number?view=azure-devops&tabs=yaml
+name: $(BuildDefinitionName)_$(SourceBranchName)_$(majorVersion).$(minorVersion)$(Rev:.r)
+
+stages:
+
+- stage: BLD
+  displayName: Build(CI)
+  variables: {buildConfiguration: 'Release'}
+  jobs:
+
+  - job: Infrastructure
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - script: echo "Running the Infrastructure build for $(applicationName)"
+      displayName: 'Starup'
+    - template: 'pipelines/infrastructure/build.yml'
+
+  - job: Application
+    pool:
+      vmImage: $(vmImage)
+    dependsOn: Infrastructure
+    steps:
+    - script: echo "Running the Application build for $(applicationName)"
+      displayName: 'Starup'
+    - template: 'pipelines/application/build.yml'
+      parameters: {buildConfiguration: $(buildConfiguration)}
+
+- stage: DEV
+  displayName: 'DEV(CD)'
+  condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  dependsOn: 
+   - BLD
+  variables: 
+    stage: 'dev'
+  jobs:
+  
+  - job: Primary_AustraliaSouthEast
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
