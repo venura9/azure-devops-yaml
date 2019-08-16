@@ -61,7 +61,7 @@ Build
 
 ### Build Status
 
-#### [Build Only](build.yml) 
+#### Build Only - [build.yml](build.yml) 
 
 
 | Branch        | Status        |
@@ -69,14 +69,14 @@ Build
 | `master`      | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=master)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=11&branchName=master)|
 | `develop`     | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=develop)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=11&branchName=develop)|
 
-#### [Build > DEV](build-dev.yml) 
+#### Build > Deploy `DEV` - [build-dev.yml](build-dev.yml) 
 
 | Branch        | Status        |
 | ------------- |:-------------:|
 | `master`      | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=master)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=14&branchName=master)|
 | `develop`     | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=develop)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=14&branchName=develop)|
 
-#### [Build> Deply to Multiple Environments](azure-pipelines.yml) 
+#### Build > Deply `Multiple Environments` - [azure-pipelines.yml](azure-pipelines.yml) 
 
 | Branch        | Status        |
 | ------------- |:-------------:|
