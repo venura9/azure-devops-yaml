@@ -2,7 +2,17 @@
 
 Azure DevOps is Micrososft's native solution which enables end-to-end software delivery. Yes, this includes the CI/CD capability with number of great features to go hand-in-hand for a comprehensive process.
 
+YAML Pipelines brought in the Configuration as Code aspect to pipelines as all the pipelines (CI/CD) can be version controlled. 
+
+Multi-Stage piplines (Currently a Preview Feature - Aug/2019) is the latest addition to the set of features, which is the core concept for this repository.
+
 The attached repository holds sample pipelines which caters the following scenarios. 
+
+#### Meetup slides supporting the repository can be found here..
+
+[![slides-on-slideshare](https://image.slidesharecdn.com/everythingascodewithazuredevops-190816021609/95/everything-as-code-with-azure-devops-1-638.jpg)](//www.slideshare.net/venura1/everything-as-code-with-azure-devops)
+
+#### Scenarios Covered
 
 ```
 Build 
@@ -49,7 +59,7 @@ Build
 
 ```
 
-### build.yml - Build Status
+#### Build Status
 
 
 | Branch        | Status        |
@@ -57,14 +67,14 @@ Build
 | `master`      | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=master)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=11&branchName=master)|
 | `develop`     | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=develop)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=11&branchName=develop)|
 
-### build-dev.yml - Build and Deploy to single environment Status
+#### Build and Deploy to single environment Status
 
 | Branch        | Status        |
 | ------------- |:-------------:|
 | `master`      | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=master)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=14&branchName=master)|
 | `develop`     | [![Build Status](https://dev.azure.com/theToDoCompany/theToDoApplication/_apis/build/status/venura9.azure-devops-yaml?branchName=develop)](https://dev.azure.com/theToDoCompany/theToDoApplication/_build/latest?definitionId=14&branchName=develop)|
 
-### azure-pipelines.yml - Deployment Status of the full pipeline
+#### Deployment Status of the full pipeline
 
 | Branch        | Status        |
 | ------------- |:-------------:|
