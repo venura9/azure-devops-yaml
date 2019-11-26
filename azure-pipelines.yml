@@ -62,9 +62,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
+      parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SPN'}
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -80,9 +80,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SPN'}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SPN'}
 
 - stage: UAT
   displayName: 'UAT(CD)'
@@ -98,9 +98,9 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal', location: 'australiasoutheast'}
+      parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
     - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', spn: 'SuperServicePrincipal'}
+      parameters: {type: 'primary', spn: 'SPN'}
 
 - stage: STG
   displayName: 'STAGING(CD)'
