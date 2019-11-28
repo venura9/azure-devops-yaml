@@ -48,7 +48,9 @@ stages:
     - template: 'pipelines/application/build.yml'
       parameters: {buildConfiguration: $(buildConfiguration)}
 
+
 - stage: DEV
+
   displayName: 'DEV(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
@@ -57,7 +59,9 @@ stages:
     stage: 'dev'
   jobs:
   
-  - job: Primary_AustraliaSouthEast
+  #- job: Primary_AustraliaSouthEast
+  - deployment: Primary_AustraliaSouthEast
+    environment: 'DEV'
     pool:
       vmImage: $(vmImage)
     steps:
