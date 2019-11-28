@@ -80,7 +80,7 @@ stages:
       vmImage: $(vmImage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SPN'}
+      parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
 
     - template: 'pipelines/application/deploy.yml'
       parameters: {type: 'primary', spn: 'SPN'}
