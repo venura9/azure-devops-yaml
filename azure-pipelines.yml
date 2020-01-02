@@ -60,7 +60,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: 'development'
+    environment: development
     strategy:
       runOnce:
         deploy:
@@ -147,7 +147,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: production
     strategy:
       runOnce:
         deploy:
