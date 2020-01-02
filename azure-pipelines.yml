@@ -60,6 +60,7 @@ stages:
   - job: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
+    environment: $(stage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
       parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
@@ -96,6 +97,7 @@ stages:
   - job: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
+    environment: $(stage)
     steps:
     - template: 'pipelines/infrastructure/deploy.yml'
       parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
