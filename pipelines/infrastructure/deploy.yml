@@ -12,7 +12,7 @@ steps:
 
 #deploy to azure
 - task: AzureResourceGroupDeployment@2
-  displayName: 'Infra - Deploy'
+  #displayName: 'Infra - Deploy'
   inputs:
     azureSubscription: ${{ parameters.spn }}
     action: 'Create Or Update Resource Group' # Options: Create Or Update Resource Group, select Resource Group, start, stop, stopWithDeallocate, restart, delete, deleteRG

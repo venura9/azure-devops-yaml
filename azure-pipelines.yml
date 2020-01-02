@@ -92,7 +92,6 @@ stages:
   variables: 
     stage: 'uat'
   jobs:
-
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
