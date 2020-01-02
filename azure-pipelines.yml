@@ -48,7 +48,9 @@ stages:
     - template: 'pipelines/application/build.yml'
       parameters: {buildConfiguration: $(buildConfiguration)}
 
+
 - stage: DEV
+
   displayName: 'DEV(CD)'
   condition: and(succeeded('BLD'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   dependsOn: 
