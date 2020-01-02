@@ -60,7 +60,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: 'development'
     strategy:
       runOnce:
         deploy:
@@ -82,7 +82,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: qa
     strategy:
       runOnce:
         deploy:
@@ -103,7 +103,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: uat
     strategy:
       runOnce:
         deploy:
@@ -125,7 +125,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: staging
     strategy:
       runOnce:
         deploy:
@@ -141,7 +141,7 @@ stages:
   dependsOn: 
    - STG
   variables: 
-    stage: 'prd'
+    stage: production
   jobs:
   
   - deployment: Primary_AustraliaSouthEast
@@ -160,7 +160,7 @@ stages:
   - deployment: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: production
     strategy:
       runOnce:
         deploy:
