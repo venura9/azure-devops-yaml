@@ -57,7 +57,7 @@ stages:
     stage: 'dev'
   jobs:
   
-  - job: Primary_AustraliaSouthEast
+  - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
@@ -79,7 +79,7 @@ stages:
     stage: 'qa'
   jobs:
 
-  - job: Primary_AustraliaSouthEast
+  - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
@@ -122,7 +122,7 @@ stages:
     stage: 'stg'
   jobs:
   
-  - job: Primary_AustraliaSouthEast
+  - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
@@ -144,7 +144,7 @@ stages:
     stage: 'prd'
   jobs:
   
-  - job: Primary_AustraliaSouthEast
+  - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
@@ -157,7 +157,7 @@ stages:
           - template: 'pipelines/application/deploy.yml'
             parameters: {type: 'primary', spn: 'SPN'}
   
-  - job: Secondary_AustraliaEast
+  - deployment: Secondary_AustraliaEast
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
