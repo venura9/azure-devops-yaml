@@ -61,11 +61,14 @@ stages:
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
-    steps:
-    - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
-    - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', spn: 'SPN'}
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - template: 'pipelines/infrastructure/deploy.yml'
+              parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
+            - template: 'pipelines/application/deploy.yml'
+              parameters: {type: 'primary', spn: 'SPN'}
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -98,11 +101,14 @@ stages:
     pool:
       vmImage: $(vmImage)
     environment: $(stage)
-    steps:
-    - template: 'pipelines/infrastructure/deploy.yml'
-      parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
-    - template: 'pipelines/application/deploy.yml'
-      parameters: {type: 'primary', spn: 'SPN'}
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - template: 'pipelines/infrastructure/deploy.yml'
+              parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
+            - template: 'pipelines/application/deploy.yml'
+              parameters: {type: 'primary', spn: 'SPN'}
 
 - stage: STG
   displayName: 'STAGING(CD)'
