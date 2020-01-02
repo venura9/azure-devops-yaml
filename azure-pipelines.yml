@@ -60,15 +60,11 @@ stages:
   - job: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: 'DEV'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: 'pipelines/infrastructure/deploy.yml'
-            parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
-          - template: 'pipelines/application/deploy.yml'
-            parameters: {type: 'primary', spn: 'SPN'}
+    steps:
+    - template: 'pipelines/infrastructure/deploy.yml'
+      parameters: {type: 'primary', spn: 'SPN', location: 'australiasoutheast'}
+    - template: 'pipelines/application/deploy.yml'
+      parameters: {type: 'primary', spn: 'SPN'}
 
 - stage: QA
   displayName: 'QA(CD)'
@@ -97,7 +93,7 @@ stages:
     stage: 'uat'
   jobs:
 
-  - job: Primary_AustraliaSouthEast
+  - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
     environment: 'UAT'
