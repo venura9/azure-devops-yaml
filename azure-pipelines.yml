@@ -95,7 +95,7 @@ stages:
   - deployment: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: 'UAT'
+    environment: $(stage)
     strategy:
       runOnce:
         deploy:
