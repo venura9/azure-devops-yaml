@@ -2,14 +2,14 @@ steps:
 
 #download the published pipelines artifact
 - task: DownloadPipelineArtifact@2
-  displayName: App - Downloading the Artifact
+  displayName: 'App - Downloading the Artifact'
   inputs:
     artifact: 'application'
     path: $(System.ArtifactsDirectory)/application/
 
 #stop the production slot
 - task: AzureAppServiceManage@0
-  displayName: App - Stop
+  displayName: 'App - Stop'
   inputs:
     azureSubscription: ${{ parameters.spn }}
     action: 'Stop Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
@@ -17,7 +17,7 @@ steps:
 
 #deploy to production slot
 - task: AzureRmWebAppDeployment@3
-  displayName: App - Deploy
+  displayName: 'App - Deploy'
   inputs:
     azureSubscription: ${{ parameters.spn }}
     WebAppName: "$(stage)-$(applicationName)-${{ parameters.type }}-webapp"
@@ -25,7 +25,7 @@ steps:
 
 #start the production slot
 - task: AzureAppServiceManage@0
-  displayName: App - Start
+  displayName: 'App - Start'
   inputs:
     azureSubscription: ${{ parameters.spn }}
     action: 'Start Azure App Service' # Optional. Options: swap Slots, start Azure App Service, stop Azure App Service, restart Azure App Service, delete Slot, install Extensions, enable Continuous Monitoring, start All Continuous Webjobs, stop All Continuous Webjobs
