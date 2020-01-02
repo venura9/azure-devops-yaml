@@ -60,7 +60,7 @@ stages:
   - job: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: 'DEV'
       strategy:
         runOnce:
           deploy:
@@ -100,7 +100,7 @@ stages:
   - job: Primary_AustraliaSouthEast
     pool:
       vmImage: $(vmImage)
-    environment: $(stage)
+    environment: 'UAT'
       strategy:
         runOnce:
           deploy:
