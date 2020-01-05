@@ -143,7 +143,7 @@ stages:
   dependsOn: 
    - STG
   variables: 
-    stage: production
+    stage: prd
   jobs:
   
   - deployment: Primary_AustraliaSouthEast
