@@ -1,5 +1,10 @@
 ### Everything as Code with Azure DevOps
 
+* Update: pipeline now includes environments for approvals. 
+* Ref: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops
+
+---
+
 Azure DevOps is Micrososft's native solution which enables end-to-end software delivery. Yes, this includes the CI/CD capability with number of great features to go hand-in-hand for a comprehensive process.
 
 YAML Pipelines brought in the Configuration as Code aspect to pipelines as all the pipelines (CI/CD) can be version controlled. 
