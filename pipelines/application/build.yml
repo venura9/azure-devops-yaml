@@ -15,19 +15,19 @@ steps:
   workingDirectory: 'dotnetcore-sqldb-tutorial'
 
 #publishing .net core on linux
-- script: dotnet publish --configuration $(buildConfiguration)
+- script: dotnet publish --configuration $(buildConfiguration) --output publish
   name: runDotnetPublish
   displayName: 'dotnet publish $(buildConfiguration)'
   workingDirectory: 'dotnetcore-sqldb-tutorial'
 
 #create of zip of the publish folder
 - task: ArchiveFiles@2
-  displayName: 'Create Archive: dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip'
+  displayName: 'Create Archive: publish/application.zip'
   inputs:
-    rootFolderOrFile: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/' 
+    rootFolderOrFile: 'publish/' 
     includeRootFolder: false 
     archiveType: 'zip'
-    archiveFile: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip' 
+    archiveFile: 'publish/application.zip' 
     replaceExistingArchive: true
 
 #publish the zip as a pipeline artifact
@@ -35,5 +35,5 @@ steps:
   displayName: 'Publish pipeline artifact - application.zip'
   inputs:
     artifactName: 'application'
-    targetPath: 'dotnetcore-sqldb-tutorial/bin/$(buildConfiguration)/netcoreapp2.1/publish/application.zip'
+    targetPath: 'publish/application.zip'
     
