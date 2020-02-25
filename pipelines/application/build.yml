@@ -22,12 +22,12 @@ steps:
 
 #create of zip of the publish folder
 - task: ArchiveFiles@2
-  displayName: 'Create Archive: publish/application.zip'
+  displayName: 'Create Archive: dotnetcore-sqldb-tutorial/publish/application.zip'
   inputs:
-    rootFolderOrFile: 'publish/' 
+    rootFolderOrFile: 'dotnetcore-sqldb-tutorial/publish/' 
     includeRootFolder: false 
     archiveType: 'zip'
-    archiveFile: 'publish/application.zip' 
+    archiveFile: 'dotnetcore-sqldb-tutorial/publish/application.zip' 
     replaceExistingArchive: true
 
 #publish the zip as a pipeline artifact
@@ -35,5 +35,5 @@ steps:
   displayName: 'Publish pipeline artifact - application.zip'
   inputs:
     artifactName: 'application'
-    targetPath: 'publish/application.zip'
+    targetPath: 'dotnetcore-sqldb-tutorial/publish/application.zip'
     
