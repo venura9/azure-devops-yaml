@@ -1,7 +1,4 @@
-### Everything as Code with Azure DevOps
-
-* Update: pipeline now includes environments for approvals. 
-* Ref: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops
+### Fully Functional YAML Pipeline for Azure DevOps
 
 ---
 
@@ -9,13 +6,14 @@ Azure DevOps is Micrososft's native solution which enables end-to-end software d
 
 YAML Pipelines brought in the Configuration as Code aspect to pipelines as all the pipelines (CI/CD) can be version controlled. 
 
-Multi-Stage piplines (Currently a Preview Feature - Aug/2019) is the latest addition to the set of features, which is the core concept for this repository.
+This repository covers a YAML pipeline which includes;
 
-The attached repository holds sample pipelines which caters the following scenarios. 
+- End-to-end CD/CD
+- Infrastucture as Code Orchestration
+- Security/Approvals
+- Everything as Code
 
-#### [Meetup](https://www.meetup.com/en-AU/Melbourne-Azure-Nights/events/263662441/) slides supporting the repository can be found here..
-
-[![slides-on-slideshare](https://image.slidesharecdn.com/everythingascodewithazuredevops-190816021609/95/everything-as-code-with-azure-devops-1-638.jpg)](//www.slideshare.net/venura1/everything-as-code-with-azure-devops)
+This repository holds sample pipelines which caters the following scenarios. 
 
 #### Scenarios Covered
 
